@@ -1,0 +1,57 @@
+
+.btn-light,
+.btn-light:hover,
+.btn-light:focus {
+  color: #fff;
+  text-shadow: none; 
+}
+
+
+.cover-container {
+  max-width: 42em;
+}
+
+
+.nav-masthead .nav-link {
+  color: rgba(255, 255, 255, .5);
+  border-bottom: .25rem solid transparent;
+}
+
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+  border-bottom-color: rgba(3, 255, 200, 0.25);
+}
+
+.nav-masthead .nav-link + .nav-link {
+  margin-left: 1rem;
+}
+
+.nav-masthead .active {
+  color: aquamarine;
+  border-bottom-color: aquamarine;
+}
+.form-container{
+  border-radius: 10px;
+  padding: 30px;
+}
+form{
+  background: #f2f2f5;
+}
+.dropdown .dropdown-menu{
+  display: none;
+}
+.dropdown:hover > .dropdown-menu, .dropend:hover > .dropdown-menu{
+  display: block;
+  margin-top: .125em;
+  margin-left: .125em;
+}
+@media screen and (min-width:769px) {
+  .dropend:hover > .dropdown-menu{
+    position: absolute;
+    top: 0;
+    left: 100%;
+  }
+  .dropend .dropdown-toggle{
+    margin-left: .5em;
+  }
+}

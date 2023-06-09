@@ -1,0 +1,151 @@
+<?php
+require_once('koneksi.php');
+
+session_start();
+if (isset($_SESSION['username'])) {
+  header("Location: home.php");
+  exit();
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMAN 1 KONOHA</title>
+    <link rel="icon" href="img/logo.png" type="image/png">
+    <style>
+        body {
+            background-color: #068e7b;
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        hr {
+            margin: 10px 0;
+            border: none;
+            border-top: 1px solid #ccc;
+        }
+
+        p {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 92%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        button {
+            font-size: medium;
+            background-color: #4cafaf;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+            
+        }
+
+        button:hover {
+            background-color: #379aa8;
+        }
+
+        a {
+            color: #000000;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+        img.konoha {
+            display: block; /* Membuat gambar menjadi elemen block */
+            margin: 0 auto; /* Mengatur margin otomatis pada sisi kiri dan kanan, sehingga gambar berada di tengah */
+            max-width: 70%; /* Membuat gambar tidak melebihi lebar form */
+            height: auto; /* Mengatur tinggi gambar secara proporsional sesuai lebar */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login">
+            <form method="POST">
+                <img class="konoha" src="img/logo.png" alt="Konoha">
+                <h1>REGISTER</h1>
+                <hr>
+                <label>Username</label>
+                <input type="text" name="username" class="form-control">
+                <label>Password</label>
+                <input type="password" name="password">
+                <button>Register</button>
+                <p>
+                    Sudah punya akun? <a href="index.html">Login</a>
+                </p>
+                <closeform></closeform>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</body>
+</html>
+
+<?php
+// Cek apakah form telah disubmit
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Ambil data dari form
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+
+    // Query untuk menyimpan data ke tabel t_login
+    $query = "INSERT INTO t_login (username, password) VALUES ('$username', '$password')";
+
+    // Jalankan query
+    if (mysqli_query($conn, $query)) {
+        // Redirect ke halaman login setelah registrasi berhasil
+        header("Location: index.html");
+        exit();
+    } else {
+        $error = "Terjadi kesalahan: " . mysqli_error($conn);
+    }
+}
+
+// Tutup koneksi ke database
+mysqli_close($conn);
+?>
